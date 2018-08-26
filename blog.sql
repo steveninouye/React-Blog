@@ -8,3 +8,14 @@ CREATE TABLE blogs (id int not null auto_increment primary key, title varchar(10
 CREATE TABLE tags( id int not null auto_increment primary key, name varchar(50) not null, _created datetime default current_timestamp);
 
 CREATE TABLE blog_tags( blog_id INT, tag_id INT, FOREIGN KEY(blog_id) REFERENCES blogs(id), FOREIGN KEY(tag_id) REFERENCES tags(id), _created datetime default current_timestamp);
+
+delimiter //
+CREATE PROCEDURE spBlogsTags (blogid int)
+BEGIN
+    SELECT t.id, t.name, t._created 
+        FROM blogs b 
+        JOIN blog_tags bt ON bt.blog_id=b.id 
+        JOIN tags t ON t.id=bt.tag_id
+        WHERE u.id = blogid;
+END //
+delimiter ;

@@ -4,13 +4,11 @@ import 'isomorphic-fetch';
 import es6Promise from 'es6-promise';
 es6Promise.polyfill();
 
-
 import Home from './Home/home';
 import GoodbyeWorld from './goodbye';
 import BlogDetails from './BlogDetails/BlogDetails';
 
-class Navigation extends Component {
-
+class App extends Component {
     render() {
         return (
             <Router>
@@ -22,8 +20,8 @@ class Navigation extends Component {
                     </Switch>
                 </Fragment>
             </Router>
-        )
+        );
     }
 }
 
-export default Navigation;
+export default App;

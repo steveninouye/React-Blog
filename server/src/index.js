@@ -2,6 +2,7 @@ import 'babel-polyfill';
 import { join } from 'path';
 import express from 'express';
 import morgan from 'morgan';
+import bp from 'body-parser';
 import routes from './routes';
 import stateRouting from './middleware/routing.mw';
 import configurePassport from './config/passport';
@@ -12,7 +13,8 @@ let app = express();
 
 app.use(morgan('dev'));
 app.use(express.static(CLIENT_PATH));
-app.use(express.json());
+app.use(bp.json());
+app.use(bp.urlencoded({ extended: false }));
 
 configurePassport(app);
 

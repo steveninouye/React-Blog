@@ -1,20 +1,17 @@
 import { Router } from 'express';
+import Table from '../table';
 
-let people = [
-    {
-        name: 'Jackson',
-        age: 25
-    },
-    {
-        name: 'Matt',
-        age: 40
-    }
-];
+const blogs = new Table('blogs');
 
 let router = Router();
 
 router.get('/', (req, res) => {
-    res.json(people);
+    blogs.getAll()
+        .then((r) => {
+            console.log(r);
+            res.send(r);
+        })
+        .catch((err) => res.send(err));
 });
 
 export default router;

@@ -1,11 +1,14 @@
 import mysql from 'mysql';
 
+// NEED TO ADD PLUGIN TO USER WHEN CREATING USER
+// SYNTAX SHOULD GO:
+// ALTER USER 'user'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';
 let pool = mysql.createPool({
     connectionLimit: 10,
     host: 'localhost',
-    user: 'exampleUser',
+    user: 'blogger',
     password: 'password',
-    database: 'InClassExample'
+    database: 'blog'
 });
 
 async function executeQuery(sql, args = []) {
@@ -37,7 +40,8 @@ function generatePlaceholders(args = []) {
     let placeholders = '';
     if (args.length > 0) {
         for (let i = 0; i < args.length; i++) {
-            if (i === args.length - 1) { // if we are on the last argument in the array
+            if (i === args.length - 1) {
+                // if we are on the last argument in the array
                 placeholders += '?';
             } else {
                 placeholders += '?,';
